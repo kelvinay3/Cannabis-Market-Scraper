@@ -1,0 +1,1767 @@
+
+<title>NJ Cannabis Intel — Platform Spec</title>
+<style>
+:root {
+  --bg: #F7F5F0;
+  --bg2: #EDEAE3;
+  --bg3: #E2DED6;
+  --fg: #1C1C19;
+  --fg2: #48483E;
+  --fg3: #7A7A6E;
+  --accent: #15502A;
+  --accent-l: #1D7038;
+  --accent-s: #E6EFE9;
+  --gold: #8C6600;
+  --gold-s: #FEF6DF;
+  --tbg: #0E100D;
+  --tfg: #BFED5A;
+  --tfg2: #70C484;
+  --tco: #3A5A40;
+  --bdr: #CCC9C0;
+  --bdr2: #B0ACA2;
+  --tag-p: #1A3A60; --tag-ps: #E6EEF8;
+  --tag-g: #15502A; --tag-gs: #E6EFE9;
+  --tag-o: #7A3800; --tag-os: #FEF0E0;
+  --tag-r: #7A1515; --tag-rs: #FEE8E8;
+  --nw: 220px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#111210; --bg2:#191B17; --bg3:#212320;
+    --fg:#F0EDE6; --fg2:#B5B2AA; --fg3:#757570;
+    --accent:#4DB872; --accent-l:#5DCF84; --accent-s:#182A1F;
+    --gold:#D4A84A; --gold-s:#28200A;
+    --tbg:#080A07; --tfg:#BFED5A; --tfg2:#70C484; --tco:#3A5A40;
+    --bdr:#282B26; --bdr2:#363930;
+    --tag-p:#1A3A60; --tag-ps:#0E1E35;
+    --tag-g:#15502A; --tag-gs:#0D2118;
+    --tag-o:#7A3800; --tag-os:#2A1600;
+    --tag-r:#7A1515; --tag-rs:#2A0808;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#111210; --bg2:#191B17; --bg3:#212320;
+  --fg:#F0EDE6; --fg2:#B5B2AA; --fg3:#757570;
+  --accent:#4DB872; --accent-l:#5DCF84; --accent-s:#182A1F;
+  --gold:#D4A84A; --gold-s:#28200A;
+  --tbg:#080A07; --tfg:#BFED5A; --tfg2:#70C484; --tco:#3A5A40;
+  --bdr:#282B26; --bdr2:#363930;
+  --tag-p:#1A3A60; --tag-ps:#0E1E35;
+  --tag-g:#15502A; --tag-gs:#0D2118;
+  --tag-o:#7A3800; --tag-os:#2A1600;
+  --tag-r:#7A1515; --tag-rs:#2A0808;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.65;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── NAV ── */
+nav {
+  width: var(--nw);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg2);
+  border-right: 1px solid var(--bdr);
+  padding: 1.75rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.nav-brand {
+  padding: 0 1.25rem 1.25rem;
+  border-bottom: 1px solid var(--bdr);
+  margin-bottom: 0.75rem;
+}
+.nav-brand .wordmark {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--accent);
+  line-height: 1.3;
+}
+.nav-brand .version {
+  font-size: 0.7rem;
+  color: var(--fg3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+.nav-group-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  padding: 0.9rem 1.25rem 0.3rem;
+}
+nav a {
+  display: block;
+  padding: 0.3rem 1.25rem;
+  font-size: 0.82rem;
+  color: var(--fg2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav a:hover { color: var(--accent); border-left-color: var(--accent); }
+
+/* ── MAIN ── */
+main {
+  flex: 1;
+  min-width: 0;
+  max-width: 900px;
+  padding: 3rem 3rem 6rem;
+}
+
+/* ── HERO ── */
+.hero {
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--bdr);
+  margin-bottom: 3rem;
+}
+.hero-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.hero h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.4rem;
+  font-weight: normal;
+  line-height: 1.18;
+  text-wrap: balance;
+  color: var(--fg);
+  max-width: 620px;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1rem;
+  color: var(--fg2);
+  max-width: 580px;
+  line-height: 1.7;
+}
+.hero-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.meta-item { font-size: 0.78rem; color: var(--fg3); }
+.meta-item strong { color: var(--fg2); font-weight: 500; }
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 1.5rem;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--bdr);
+}
+.section-num {
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  color: var(--fg3);
+}
+.section h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.45rem;
+  font-weight: normal;
+  color: var(--fg);
+}
+.section h3 {
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: normal;
+  color: var(--fg);
+  margin: 1.75rem 0 0.7rem;
+}
+.section p { color: var(--fg2); margin-bottom: 0.9rem; max-width: 700px; }
+.section p:last-child { margin-bottom: 0; }
+
+/* ── TAGS / BADGES ── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2em 0.55em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.tag-green { background: var(--tag-gs); color: var(--tag-g); }
+.tag-blue  { background: var(--tag-ps); color: var(--tag-p); }
+.tag-amber { background: var(--tag-os); color: var(--tag-o); }
+.tag-red   { background: var(--tag-rs); color: var(--tag-r); }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+th {
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--bdr);
+  background: var(--bg2);
+}
+td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--bdr);
+  color: var(--fg2);
+  vertical-align: top;
+}
+td strong { color: var(--fg); font-weight: 500; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg2); }
+
+/* ── CODE / TERMINAL ── */
+.code-block {
+  background: var(--tbg);
+  border-radius: 5px;
+  margin: 1.25rem 0;
+  overflow: hidden;
+  border: 1px solid #1E2B1E;
+}
+.code-label {
+  background: #151810;
+  padding: 0.45rem 1rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tco);
+  border-bottom: 1px solid #1E2B1E;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.code-label::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--tfg);
+  opacity: 0.6;
+}
+.code-block pre {
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--tfg);
+}
+.kw { color: #7EB8DE; }
+.cm { color: var(--tco); font-style: italic; }
+.str { color: #C8A86E; }
+.ty { color: #D8A0C0; }
+.fn { color: var(--tfg2); }
+.num { color: #E8C06E; }
+.hl { background: rgba(191,237,90,0.08); }
+
+/* ── CALLOUT ── */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-s);
+  padding: 1rem 1.25rem;
+  border-radius: 0 4px 4px 0;
+  margin: 1.25rem 0;
+  font-size: 0.88rem;
+  color: var(--fg2);
+}
+.callout.gold {
+  border-left-color: var(--gold);
+  background: var(--gold-s);
+}
+.callout strong { color: var(--fg); }
+
+/* ── PLATFORM CARDS ── */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+.platform-card {
+  background: var(--bg2);
+  border: 1px solid var(--bdr);
+  border-radius: 5px;
+  padding: 1rem 1.1rem;
+}
+.platform-card .pc-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--fg);
+  margin-bottom: 0.2rem;
+}
+.platform-card .pc-type {
+  font-size: 0.7rem;
+  color: var(--fg3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.6rem;
+}
+.platform-card .pc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--fg3);
+  padding: 0.2rem 0;
+  border-top: 1px solid var(--bdr);
+}
+.platform-card .pc-row span:last-child { color: var(--fg2); text-align: right; }
+
+/* ── ROLE TABLE ── */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0;
+}
+.role-card {
+  border: 1px solid var(--bdr);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.role-card .rc-head {
+  padding: 0.6rem 0.9rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--bdr);
+}
+.role-card .rc-name { font-weight: 600; font-size: 0.85rem; color: var(--fg); }
+.role-card .rc-slug { font-size: 0.68rem; color: var(--fg3); font-family: monospace; }
+.role-card ul {
+  list-style: none;
+  padding: 0.7rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.role-card li {
+  font-size: 0.75rem;
+  color: var(--fg2);
+  padding-left: 0.9rem;
+  position: relative;
+}
+.role-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.65rem;
+}
+
+/* ── PHASE TIMELINE ── */
+.phases { display: flex; flex-direction: column; gap: 0; margin: 1.25rem 0; }
+.phase {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 1rem;
+  position: relative;
+}
+.phase::before {
+  content: '';
+  position: absolute;
+  left: 34px;
+  top: 32px;
+  bottom: -1px;
+  width: 1px;
+  background: var(--bdr);
+}
+.phase:last-child::before { display: none; }
+.phase-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+}
+.phase-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, serif;
+  font-size: 0.75rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.phase-body { padding-bottom: 2rem; }
+.phase-title {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  color: var(--fg);
+  margin-bottom: 0.3rem;
+  margin-top: 0.1rem;
+}
+.phase-sub { font-size: 0.78rem; color: var(--fg3); margin-bottom: 0.6rem; }
+.phase-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.phase-item {
+  font-size: 0.72rem;
+  background: var(--bg2);
+  border: 1px solid var(--bdr);
+  padding: 0.2em 0.55em;
+  border-radius: 3px;
+  color: var(--fg2);
+}
+
+/* ── MASTER PROMPT ── */
+.prompt-wrap {
+  background: var(--tbg);
+  border: 1px solid #1E2B1E;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+.prompt-header {
+  background: #151810;
+  padding: 0.6rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1E2B1E;
+}
+.prompt-header span {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tco);
+}
+.prompt-header .dots { display: flex; gap: 5px; }
+.prompt-header .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FEBC2E; }
+.dot-g { background: #28C840; }
+.prompt-wrap pre {
+  padding: 1.5rem 1.25rem;
+  overflow-x: auto;
+  font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  font-size: 0.77rem;
+  line-height: 1.75;
+  color: #D0EBB8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.prompt-wrap .ph { color: var(--tfg); font-weight: 600; }
+.prompt-wrap .sec { color: var(--tfg2); font-weight: 600; }
+.prompt-wrap .cm { color: var(--tco); font-style: italic; }
+
+@media (max-width: 760px) {
+  body { flex-direction: column; }
+  nav { width: 100%; height: auto; position: static; flex-direction: row; flex-wrap: wrap; border-right: none; border-bottom: 1px solid var(--bdr); padding: 1rem; gap: 0.5rem; }
+  .nav-brand { border-bottom: none; padding: 0; margin: 0; }
+  .nav-group-label { display: none; }
+  nav a { padding: 0.2rem 0.6rem; border-left: none; font-size: 0.75rem; }
+  main { padding: 1.5rem 1.25rem 4rem; }
+  .hero h1 { font-size: 1.75rem; }
+  .phase { grid-template-columns: 1fr; }
+  .phase-num { display: none; }
+  .phase::before { display: none; }
+  .phase-body { padding-bottom: 1.5rem; }
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="wordmark">NJ Cannabis<br>Intelligence</div>
+    <div class="version">Platform Spec v1.0</div>
+  </div>
+  <div class="nav-group-label">Overview</div>
+  <a href="#vision">Vision & Use Cases</a>
+  <a href="#users">User System & Auth</a>
+  <div class="nav-group-label">Data Layer</div>
+  <a href="#sources">Data Sources</a>
+  <a href="#database">Database Schema</a>
+  <div class="nav-group-label">Architecture</div>
+  <a href="#backend">Backend API</a>
+  <a href="#scraping">Scraping Engine</a>
+  <a href="#live">Live Monitoring</a>
+  <div class="nav-group-label">Product</div>
+  <a href="#frontend">Dashboard & UI</a>
+  <a href="#alerts">Alert System</a>
+  <a href="#reports">Reports</a>
+  <div class="nav-group-label">Build</div>
+  <a href="#stack">Tech Stack</a>
+  <a href="#phases">Build Phases</a>
+  <a href="#prompt">Master Prompt</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">NJ Dispensary Market Intelligence</div>
+  <h1>Platform Specification & Master Build Prompt</h1>
+  <p>A full-stack competitive intelligence platform that scrapes every NJ dispensary's deals, pricing, and new drops in near real-time — organized by geography and built to sell.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><strong>Version</strong> 1.0</div>
+    <div class="meta-item"><strong>State</strong> New Jersey (21 counties)</div>
+    <div class="meta-item"><strong>Date</strong> August 2026</div>
+    <div class="meta-item"><strong>Stack</strong> Python / FastAPI / Next.js / PostGIS</div>
+  </div>
+</div>
+
+<!-- SECTION 1: VISION -->
+<div class="section" id="vision">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Vision & Use Cases</h2>
+  </div>
+  <p>An upgraded replacement for Lit Alerts and Pistil Data, built NJ-first. Where those tools are broad and national, this platform is hyper-local — every discount, every price drop, every new product drop, filtered by radius, county, or city. Built for marketing directors, expandable into a SaaS sold to competing dispensaries and MSOs.</p>
+
+  <h3>Primary Use Cases</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Who</th><th>What They Need</th><th>Platform Feature</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Marketing Director (you)</strong></td><td>Know what competitors are running before planning your own promos</td><td>Live deal feed, county/radius filter, alert on new deals</td></tr>
+        <tr><td><strong>Dispensary GM</strong></td><td>Benchmark pricing against nearby dispensaries</td><td>Price comparison report, neighbor radius view</td></tr>
+        <tr><td><strong>MSO Marketing Team</strong></td><td>Track deal patterns across an entire region</td><td>Regional market report, trend charts, weekly digest</td></tr>
+        <tr><td><strong>Cannabis Investor</strong></td><td>Understand competitive pricing and deal frequency</td><td>Market overview reports, historical data export</td></tr>
+        <tr><td><strong>Brand / Vendor</strong></td><td>See which dispensaries are promoting their products</td><td>Brand-level deal tracking, product mention alerts</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What Makes This Different</h3>
+  <div class="callout">
+    <strong>Lit Alerts</strong> sends SMS blasts for deals nationally — no geographic intelligence, no history, no competitive context. <strong>Pistil Data</strong> sells enterprise reports at enterprise prices, not NJ-specific, not real-time. <strong>This platform</strong> is NJ-only, real-time, geo-filtered, and built from a marketing director's lens — not a data analyst's.
+  </div>
+</div>
+
+<!-- SECTION 2: USER SYSTEM -->
+<div class="section" id="users">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>User System & Authentication</h2>
+  </div>
+  <p>Multi-tenant architecture with organization-level isolation. Each paying customer is an organization. Users belong to one organization and hold one role.</p>
+
+  <h3>User Roles</h3>
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="rc-head">
+        <div class="rc-name">Super Admin</div>
+        <div class="rc-slug">super_admin</div>
+      </div>
+      <ul>
+        <li>Manage all orgs & plans</li>
+        <li>Control scraper sources</li>
+        <li>Platform-wide analytics</li>
+        <li>Impersonate any user</li>
+        <li>Billing & subscription mgmt</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <div class="rc-head">
+        <div class="rc-name">Admin</div>
+        <div class="rc-slug">admin</div>
+      </div>
+      <ul>
+        <li>Manage org users & invites</li>
+        <li>Configure org-level alerts</li>
+        <li>Access all reports</li>
+        <li>Export any data</li>
+        <li>Manage saved reports</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <div class="rc-head">
+        <div class="rc-name">Manager</div>
+        <div class="rc-slug">manager</div>
+      </div>
+      <ul>
+        <li>Create / edit own alerts</li>
+        <li>Run & schedule reports</li>
+        <li>Export report data</li>
+        <li>View full deal history</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <div class="rc-head">
+        <div class="rc-name">Analyst</div>
+        <div class="rc-slug">analyst</div>
+      </div>
+      <ul>
+        <li>Read-only dashboard</li>
+        <li>View deal feed & history</li>
+        <li>Export report data</li>
+        <li>View saved reports</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <div class="rc-head">
+        <div class="rc-name">Viewer</div>
+        <div class="rc-slug">viewer</div>
+      </div>
+      <ul>
+        <li>Read-only dashboard</li>
+        <li>View current deals only</li>
+        <li>No export access</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Auth Flow</h3>
+  <div class="code-block">
+    <div class="code-label">Auth Endpoints — FastAPI</div>
+    <pre><span class="cm"># Authentication</span>
+<span class="fn">POST</span>  /api/v1/auth/register          <span class="cm"># create account + org</span>
+<span class="fn">POST</span>  /api/v1/auth/login             <span class="cm"># returns access_token + refresh_token</span>
+<span class="fn">POST</span>  /api/v1/auth/refresh           <span class="cm"># rotate access token (15min expiry)</span>
+<span class="fn">POST</span>  /api/v1/auth/logout            <span class="cm"># blacklist refresh token</span>
+<span class="fn">POST</span>  /api/v1/auth/forgot-password
+<span class="fn">POST</span>  /api/v1/auth/reset-password/{token}
+
+<span class="cm"># User management</span>
+<span class="fn">GET</span>   /api/v1/users/me
+<span class="fn">PATCH</span> /api/v1/users/me
+<span class="fn">GET</span>   /api/v1/users/                  <span class="cm"># admin: list org users</span>
+<span class="fn">POST</span>  /api/v1/users/invite            <span class="cm"># send email invitation</span>
+<span class="fn">PATCH</span> /api/v1/users/{id}/role        <span class="cm"># admin: change role</span>
+<span class="fn">DELETE</span> /api/v1/users/{id}            <span class="cm"># admin: remove user</span></pre>
+  </div>
+
+  <div class="callout">
+    <strong>JWT Implementation:</strong> Access tokens expire in 15 minutes. Refresh tokens expire in 30 days and are rotated on use. Store refresh token in httpOnly cookie. Blacklist on logout using Redis with TTL = token remaining life.
+  </div>
+</div>
+
+<!-- SECTION 3: DATA SOURCES -->
+<div class="section" id="sources">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Data Sources & Scraping Strategy</h2>
+  </div>
+  <p>Most NJ dispensaries don't run custom menus — they embed one of a handful of platforms. Build scrapers for the platforms, not per-dispensary. The NJ CRC provides the authoritative list of licensed dispensaries as the master registry.</p>
+
+  <h3>NJ CRC — Master Registry</h3>
+  <div class="callout gold">
+    <strong>Start here.</strong> The NJ Cannabis Regulatory Commission publishes a list of all licensed dispensaries at <code>nj.gov/cannabis/businesses/licensees/</code>. Scrape this weekly to catch new licenses. This is your source of truth for the dispensary table.
+  </div>
+
+  <h3>Platform Coverage in NJ</h3>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="pc-name">Jane / iHeartJane</div>
+      <div class="pc-type">eCommerce Menu Platform</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>~35–40% of dispos</span></div>
+      <div class="pc-row"><span>API Type</span><span>Public REST</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>None for menus</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-green">High</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Dutchie</div>
+      <div class="pc-type">POS + eCommerce</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>~25–30% of dispos</span></div>
+      <div class="pc-row"><span>API Type</span><span>GraphQL (public embed)</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>None for menus</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-green">High</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Weedmaps</div>
+      <div class="pc-type">Marketplace Aggregator</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>Most NJ dispos listed</span></div>
+      <div class="pc-row"><span>API Type</span><span>Internal GraphQL/REST</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>No (ToS risk)</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-green">High</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Leafly</div>
+      <div class="pc-type">Marketplace Aggregator</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>Most NJ dispos listed</span></div>
+      <div class="pc-row"><span>API Type</span><span>Internal REST</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>No (ToS risk)</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-blue">Medium</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Treez</div>
+      <div class="pc-type">POS + eCommerce</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>~10% of dispos</span></div>
+      <div class="pc-row"><span>API Type</span><span>REST (public embed)</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>Store key in page</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-blue">Medium</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Dispense</div>
+      <div class="pc-type">eCommerce Platform</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>Small but growing</span></div>
+      <div class="pc-row"><span>API Type</span><span>REST (public)</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>Store slug in URL</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-amber">Watch</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Sweed</div>
+      <div class="pc-type">POS + eCommerce (EU)</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>Very limited currently</span></div>
+      <div class="pc-row"><span>API Type</span><span>REST</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>Varies</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-amber">Watch</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Cova</div>
+      <div class="pc-type">POS (Canada-first)</div>
+      <div class="pc-row"><span>NJ Coverage</span><span>Minimal, expanding</span></div>
+      <div class="pc-row"><span>API Type</span><span>No public eComm API</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>Yes</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-red">Low</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Pistil Data</div>
+      <div class="pc-type">Market Intelligence</div>
+      <div class="pc-row"><span>Model</span><span>We replace this for NJ</span></div>
+      <div class="pc-row"><span>API Type</span><span>Paid enterprise API</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>Yes — paid</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-amber">Learn From</span></span></div>
+    </div>
+    <div class="platform-card">
+      <div class="pc-name">Lit Alerts</div>
+      <div class="pc-type">Deal Alert Service</div>
+      <div class="pc-row"><span>Model</span><span>We replace this for NJ</span></div>
+      <div class="pc-row"><span>API Type</span><span>Consumer product only</span></div>
+      <div class="pc-row"><span>Auth Required</span><span>N/A</span></div>
+      <div class="pc-row"><span>Priority</span><span><span class="tag tag-amber">Compete With</span></span></div>
+    </div>
+  </div>
+
+  <h3>API Endpoint Patterns</h3>
+  <div class="code-block">
+    <div class="code-label">Jane — iHeartJane Public API</div>
+    <pre><span class="cm"># Base: https://api.iheartjane.com/v1/</span>
+
+<span class="cm"># Discover NJ stores</span>
+<span class="fn">GET</span> /stores?state=NJ&amp;near_lat=40.7&amp;near_lng=-74.0&amp;radius=50
+
+<span class="cm"># Full menu for a store</span>
+<span class="fn">GET</span> /stores/<span class="str">{store_id}</span>/menu
+
+<span class="cm"># Active specials / deals only</span>
+<span class="fn">GET</span> /stores/<span class="str">{store_id}</span>/specials
+
+<span class="cm"># Individual product</span>
+<span class="fn">GET</span> /stores/<span class="str">{store_id}</span>/products/<span class="str">{product_id}</span>
+
+<span class="cm"># Response shape for specials:</span>
+{
+  "specials": [{
+    "id": <span class="num">12345</span>,
+    "title": <span class="str">"20% Off All Flower"</span>,
+    "description": <span class="str">"..."</span>,
+    "photo_url": <span class="str">"..."</span>,
+    "start_time": <span class="str">"2026-08-01T00:00:00Z"</span>,
+    "end_time": <span class="str">"2026-08-31T23:59:59Z"</span>,
+    "conditions": { "applicable_kinds": [<span class="str">"flower"</span>] },
+    "special_type": <span class="str">"percent_off"</span>,
+    "special_amount": <span class="num">20</span>
+  }]
+}</pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">Dutchie — GraphQL (Public Embed)</div>
+    <pre><span class="cm"># Base: https://dutchie.com/api/retailer/graphql</span>
+<span class="cm"># Also: https://plus.dutchie.com/plus/2021-07/graphql</span>
+
+<span class="cm"># Detect Dutchie by looking for embedded iframe or script tag:</span>
+<span class="cm"># &lt;script src="https://dutchie.com/api/embed/menu/{retailer-id}"&gt;</span>
+
+<span class="kw">query</span> <span class="fn">GetMenu</span>($retailerId: <span class="ty">String!</span>) {
+  menu(retailerId: $retailerId) {
+    products {
+      id name brand category
+      variants { price option }
+      specialPricing { salePrice originalPrice }
+    }
+    specials {
+      id name description startDate endDate
+      discountType discountAmount
+      conditions { applicableCategories }
+    }
+  }
+}</pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">Weedmaps — Internal API</div>
+    <pre><span class="cm"># Base: https://api-g.weedmaps.com/discovery/v1/</span>
+
+<span class="cm"># List all NJ dispensaries</span>
+<span class="fn">GET</span> /listings?filter[state_abv]=NJ&amp;filter[type]=dispensary&amp;page[size]=100
+
+<span class="cm"># Deals for a listing</span>
+<span class="fn">GET</span> /listings/<span class="str">{wmid}</span>/promotions
+
+<span class="cm"># Menu items</span>
+<span class="fn">GET</span> /listings/<span class="str">{wmid}</span>/menu_items?include=price_tiers&amp;filter[category]=flower
+
+<span class="cm"># Response includes wmid, slug, lat/lng, city, county</span>
+<span class="cm"># Must send headers: User-Agent, Referer: https://weedmaps.com</span></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">Leafly — Internal API</div>
+    <pre><span class="cm"># Base: https://consumer-api.leafly.com/api/</span>
+
+<span class="cm"># NJ dispensary list</span>
+<span class="fn">GET</span> /dispensary_info/v2?state_abbr=NJ&amp;take=50&amp;skip=0
+
+<span class="cm"># Deals for a dispensary</span>
+<span class="fn">GET</span> /dispensary_info/v2/<span class="str">{slug}</span>/deals
+
+<span class="cm"># Menu</span>
+<span class="fn">GET</span> /strain_playlists/v2?dispensary_slug=<span class="str">{slug}</span>&amp;strain_facets=true
+
+<span class="cm"># Headers required: app_type=web, x-user-timezone</span></pre>
+  </div>
+
+  <div class="code-block">
+    <div class="code-label">Treez — Embedded Menu API</div>
+    <pre><span class="cm"># Treez embeds a public menu using a retailer API key found in page source</span>
+<span class="cm"># Base: https://api.treez.io/catalog/v3/</span>
+
+<span class="cm"># Detect by looking for: window.treezConfig = { apiKey: "..." }</span>
+
+<span class="fn">GET</span> /catalog/<span class="str">{retailer_id}</span>/menu?category=flower
+<span class="fn">GET</span> /catalog/<span class="str">{retailer_id}</span>/specials
+
+<span class="cm"># Auth: x-api-key header (from page source — publicly visible)</span></pre>
+  </div>
+</div>
+
+<!-- SECTION 4: DATABASE -->
+<div class="section" id="database">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Database Schema</h2>
+  </div>
+  <p>PostgreSQL 15 + PostGIS. Geo columns use <code>GEOGRAPHY(POINT, 4326)</code> so PostGIS handles radius queries natively. All timestamps are UTC.</p>
+
+  <div class="code-block">
+    <div class="code-label">Core Tables — PostgreSQL + PostGIS</div>
+    <pre><span class="cm">-- Multi-tenant organizations</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">organizations</span> (
+  id          <span class="ty">UUID</span> <span class="kw">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  name        <span class="ty">TEXT NOT NULL</span>,
+  plan        <span class="ty">TEXT</span> <span class="kw">DEFAULT</span> <span class="str">'free'</span>,   <span class="cm">-- free | pro | enterprise</span>
+  created_at  <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="cm">-- Users</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">users</span> (
+  id            <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  org_id        <span class="ty">UUID REFERENCES</span> organizations(id),
+  email         <span class="ty">TEXT UNIQUE NOT NULL</span>,
+  password_hash <span class="ty">TEXT NOT NULL</span>,
+  role          <span class="ty">TEXT NOT NULL DEFAULT</span> <span class="str">'viewer'</span>,
+  name          <span class="ty">TEXT</span>,
+  created_at    <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  last_login    <span class="ty">TIMESTAMPTZ</span>
+);
+
+<span class="cm">-- Master dispensary registry</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">dispensaries</span> (
+  id               <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  name             <span class="ty">TEXT NOT NULL</span>,
+  slug             <span class="ty">TEXT UNIQUE</span>,
+  license_number   <span class="ty">TEXT</span>,           <span class="cm">-- NJ CRC license</span>
+  address          <span class="ty">TEXT</span>,
+  city             <span class="ty">TEXT</span>,
+  county           <span class="ty">TEXT</span>,
+  zip              <span class="ty">TEXT</span>,
+  lat              <span class="ty">NUMERIC(10,7)</span>,
+  lng              <span class="ty">NUMERIC(10,7)</span>,
+  geom             <span class="ty">GEOGRAPHY(POINT, 4326)</span>, <span class="cm">-- for PostGIS radius queries</span>
+  weedmaps_id      <span class="ty">TEXT</span>,
+  leafly_slug      <span class="ty">TEXT</span>,
+  jane_store_id    <span class="ty">TEXT</span>,
+  dutchie_id       <span class="ty">TEXT</span>,
+  treez_id         <span class="ty">TEXT</span>,
+  dispense_slug    <span class="ty">TEXT</span>,
+  primary_platform <span class="ty">TEXT</span>,   <span class="cm">-- jane | dutchie | weedmaps | leafly | custom</span>
+  website          <span class="ty">TEXT</span>,
+  phone            <span class="ty">TEXT</span>,
+  instagram        <span class="ty">TEXT</span>,
+  status           <span class="ty">TEXT DEFAULT</span> <span class="str">'active'</span>,
+  med_only         <span class="ty">BOOLEAN DEFAULT FALSE</span>,
+  created_at       <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  updated_at       <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);
+<span class="kw">CREATE INDEX</span> idx_dispensaries_geom <span class="kw">ON</span> dispensaries <span class="kw">USING</span> GIST(geom);
+<span class="kw">CREATE INDEX</span> idx_dispensaries_county <span class="kw">ON</span> dispensaries(county);
+
+<span class="cm">-- Active deals</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">deals</span> (
+  id                    <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  dispensary_id         <span class="ty">UUID REFERENCES</span> dispensaries(id),
+  source_platform       <span class="ty">TEXT</span>,    <span class="cm">-- jane | dutchie | weedmaps | leafly</span>
+  external_id           <span class="ty">TEXT</span>,    <span class="cm">-- ID from source platform</span>
+  title                 <span class="ty">TEXT</span>,
+  description           <span class="ty">TEXT</span>,
+  deal_type             <span class="ty">TEXT</span>,    <span class="cm">-- percent_off | dollar_off | bogo | bundle | first_time | daily</span>
+  discount_value        <span class="ty">NUMERIC</span>, <span class="cm">-- 20 for "20% off", 5 for "$5 off"</span>
+  discount_unit         <span class="ty">TEXT</span>,    <span class="cm">-- percent | dollar</span>
+  minimum_purchase      <span class="ty">NUMERIC</span>,
+  applicable_categories <span class="ty">TEXT[]</span>, <span class="cm">-- {flower, edibles, concentrates}</span>
+  applicable_brands     <span class="ty">TEXT[]</span>,
+  day_of_week           <span class="ty">TEXT[]</span>, <span class="cm">-- null=all days, or {monday, tuesday}</span>
+  starts_at             <span class="ty">TIMESTAMPTZ</span>,
+  ends_at               <span class="ty">TIMESTAMPTZ</span>,
+  is_active             <span class="ty">BOOLEAN DEFAULT TRUE</span>,
+  raw_text              <span class="ty">TEXT</span>,   <span class="cm">-- original scraped text for re-parsing</span>
+  first_seen_at         <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  last_seen_at          <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  created_at            <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="cm">-- Deal change history</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">deal_history</span> (
+  id           <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  deal_id      <span class="ty">UUID REFERENCES</span> deals(id),
+  change_type  <span class="ty">TEXT</span>, <span class="cm">-- created | modified | deactivated | reactivated</span>
+  old_data     <span class="ty">JSONB</span>,
+  new_data     <span class="ty">JSONB</span>,
+  changed_at   <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="cm">-- Menu items (product catalog)</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">menu_items</span> (
+  id            <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  dispensary_id <span class="ty">UUID REFERENCES</span> dispensaries(id),
+  external_id   <span class="ty">TEXT</span>,
+  name          <span class="ty">TEXT</span>,
+  brand         <span class="ty">TEXT</span>,
+  category      <span class="ty">TEXT</span>,    <span class="cm">-- flower | edible | concentrate | vape | tincture | topical | preroll</span>
+  subcategory   <span class="ty">TEXT</span>,
+  thc_percent   <span class="ty">NUMERIC(5,2)</span>,
+  cbd_percent   <span class="ty">NUMERIC(5,2)</span>,
+  weight        <span class="ty">NUMERIC</span>,  <span class="cm">-- grams</span>
+  current_price <span class="ty">NUMERIC(10,2)</span>,
+  sale_price    <span class="ty">NUMERIC(10,2)</span>,
+  is_active     <span class="ty">BOOLEAN DEFAULT TRUE</span>,
+  first_seen_at <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  updated_at    <span class="ty">TIMESTAMPTZ DEFAULT</span> now(),
+  UNIQUE(dispensary_id, external_id)
+);
+
+<span class="cm">-- Price change tracking</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">price_changes</span> (
+  id             <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  item_id        <span class="ty">UUID REFERENCES</span> menu_items(id),
+  dispensary_id  <span class="ty">UUID REFERENCES</span> dispensaries(id),
+  old_price      <span class="ty">NUMERIC(10,2)</span>,
+  new_price      <span class="ty">NUMERIC(10,2)</span>,
+  change_amount  <span class="ty">NUMERIC(10,2)</span>,
+  change_pct     <span class="ty">NUMERIC(6,2)</span>,
+  change_type    <span class="ty">TEXT</span>,    <span class="cm">-- increase | decrease</span>
+  detected_at    <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="cm">-- User-defined alert rules</span>
+<span class="kw">CREATE TABLE</span> <span class="fn">alerts</span> (
+  id            <span class="ty">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  user_id       <span class="ty">UUID REFERENCES</span> users(id),
+  org_id        <span class="ty">UUID REFERENCES</span> organizations(id),
+  name          <span class="ty">TEXT NOT NULL</span>,
+  trigger_type  <span class="ty">TEXT</span>, <span class="cm">-- new_deal | price_drop | new_product | deal_change | deal_expired</span>
+  filter_config <span class="ty">JSONB</span>, <span class="cm">-- geo filter, category, brand, dispensary list</span>
+  channels      <span class="ty">TEXT[]</span>, <span class="cm">-- {email, sms, webhook}</span>
+  is_active     <span class="ty">BOOLEAN DEFAULT TRUE</span>,
+  created_at    <span class="ty">TIMESTAMPTZ DEFAULT</span> now()
+);</pre>
+  </div>
+
+  <h3>Geographic Radius Query</h3>
+  <div class="code-block">
+    <div class="code-label">PostGIS — Radius Search Example</div>
+    <pre><span class="cm">-- All dispensaries within 10 miles of a lat/lng with active deals</span>
+<span class="kw">SELECT</span>
+  d.name, d.city, d.county,
+  <span class="fn">ST_Distance</span>(d.geom, <span class="fn">ST_MakePoint</span>(:lng, :lat)::geography) / <span class="num">1609.34</span> <span class="kw">AS</span> miles,
+  COUNT(deals.id) <span class="kw">AS</span> active_deals
+<span class="kw">FROM</span> dispensaries d
+<span class="kw">LEFT JOIN</span> deals <span class="kw">ON</span> deals.dispensary_id = d.id <span class="kw">AND</span> deals.is_active = <span class="kw">TRUE</span>
+<span class="kw">WHERE</span> <span class="fn">ST_DWithin</span>(d.geom, <span class="fn">ST_MakePoint</span>(:lng, :lat)::geography, :meters)
+<span class="kw">GROUP BY</span> d.id
+<span class="kw">ORDER BY</span> miles;</pre>
+  </div>
+</div>
+
+<!-- SECTION 5: BACKEND API -->
+<div class="section" id="backend">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Backend API Design</h2>
+  </div>
+  <div class="code-block">
+    <div class="code-label">Full API Route Map — FastAPI</div>
+    <pre><span class="cm">## Auth & Users (see Section 02)</span>
+/api/v1/auth/*
+/api/v1/users/*
+
+<span class="cm">## Dispensaries</span>
+<span class="fn">GET</span>  /api/v1/dispensaries/               <span class="cm"># list, filter by county/city/status</span>
+<span class="fn">GET</span>  /api/v1/dispensaries/<span class="str">{id}</span>           <span class="cm"># detail with current deals + menu snapshot</span>
+<span class="fn">GET</span>  /api/v1/dispensaries/nearby          <span class="cm"># ?lat=&lng=&radius_miles=10</span>
+<span class="fn">GET</span>  /api/v1/dispensaries/by-county/<span class="str">{county}</span>
+<span class="fn">GET</span>  /api/v1/dispensaries/by-city/<span class="str">{city}</span>
+
+<span class="cm">## Deals</span>
+<span class="fn">GET</span>  /api/v1/deals/                      <span class="cm"># live feed, all filters available</span>
+     <span class="cm"># ?county=Hudson&category=flower&deal_type=percent_off&min_discount=20</span>
+<span class="fn">GET</span>  /api/v1/deals/<span class="str">{id}</span>
+<span class="fn">GET</span>  /api/v1/deals/<span class="str">{id}</span>/history
+<span class="fn">GET</span>  /api/v1/deals/dispensary/<span class="str">{dispensary_id}</span>
+<span class="fn">GET</span>  /api/v1/deals/new                   <span class="cm"># deals added in last N hours</span>
+<span class="fn">GET</span>  /api/v1/deals/expiring              <span class="cm"># deals ending in next 48h</span>
+
+<span class="cm">## Prices & Menu</span>
+<span class="fn">GET</span>  /api/v1/prices/changes              <span class="cm"># recent price changes, filterable</span>
+<span class="fn">GET</span>  /api/v1/prices/drops                <span class="cm"># price decreases only</span>
+<span class="fn">GET</span>  /api/v1/menu/dispensary/<span class="str">{id}</span>        <span class="cm"># current menu snapshot</span>
+<span class="fn">GET</span>  /api/v1/menu/new-products           <span class="cm"># items first seen in last N days</span>
+
+<span class="cm">## Reports</span>
+<span class="fn">GET</span>  /api/v1/reports/types               <span class="cm"># list available report types</span>
+<span class="fn">POST</span> /api/v1/reports/run                 <span class="cm"># run a report on-demand</span>
+<span class="fn">GET</span>  /api/v1/reports/saved               <span class="cm"># user's saved report configs</span>
+<span class="fn">POST</span> /api/v1/reports/saved               <span class="cm"># save a report config</span>
+<span class="fn">POST</span> /api/v1/reports/saved/<span class="str">{id}</span>/run
+<span class="fn">POST</span> /api/v1/reports/saved/<span class="str">{id}</span>/schedule <span class="cm"># set recurring schedule + recipients</span>
+<span class="fn">GET</span>  /api/v1/reports/exports             <span class="cm"># list downloadable exports</span>
+<span class="fn">GET</span>  /api/v1/reports/exports/<span class="str">{id}</span>/download
+
+<span class="cm">## Alerts</span>
+<span class="fn">GET</span>  /api/v1/alerts/                     <span class="cm"># list user's alerts</span>
+<span class="fn">POST</span> /api/v1/alerts/                     <span class="cm"># create alert</span>
+<span class="fn">PATCH</span> /api/v1/alerts/<span class="str">{id}</span>
+<span class="fn">DELETE</span> /api/v1/alerts/<span class="str">{id}</span>
+<span class="fn">POST</span> /api/v1/alerts/<span class="str">{id}</span>/test           <span class="cm"># send a test notification</span>
+<span class="fn">GET</span>  /api/v1/alerts/history              <span class="cm"># all triggered events</span>
+
+<span class="cm">## Admin (super_admin only)</span>
+<span class="fn">GET</span>  /api/v1/admin/scrapers              <span class="cm"># list all scrape sources</span>
+<span class="fn">POST</span> /api/v1/admin/scrapers/<span class="str">{id}</span>/run     <span class="cm"># trigger manual scrape</span>
+<span class="fn">GET</span>  /api/v1/admin/scrape-jobs           <span class="cm"># job history + errors</span>
+<span class="fn">GET</span>  /api/v1/admin/orgs                  <span class="cm"># list organizations</span>
+<span class="fn">GET</span>  /api/v1/admin/stats                 <span class="cm"># platform health stats</span>
+
+<span class="cm">## WebSocket — Live Feed</span>
+<span class="fn">WS</span>   /api/v1/live/deals                  <span class="cm"># real-time deal events</span>
+<span class="fn">WS</span>   /api/v1/live/prices                 <span class="cm"># real-time price change events</span></pre>
+  </div>
+</div>
+
+<!-- SECTION 6: SCRAPING -->
+<div class="section" id="scraping">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Scraping Engine</h2>
+  </div>
+  <p>Celery Beat handles scheduling. Redis is the broker. Each platform has a dedicated scraper class. Playwright handles JS-heavy or anti-bot sites. aiohttp handles clean REST/GraphQL APIs.</p>
+
+  <div class="code-block">
+    <div class="code-label">Scraping Architecture</div>
+    <pre><span class="cm"># Scrape schedule by platform priority</span>
+jane_scraper      <span class="kw">→</span> every <span class="num">2h</span>  (REST, fast, clean)
+dutchie_scraper   <span class="kw">→</span> every <span class="num">2h</span>  (GraphQL, fast)
+weedmaps_scraper  <span class="kw">→</span> every <span class="num">3h</span>  (REST, rate-limit sensitive)
+leafly_scraper    <span class="kw">→</span> every <span class="num">4h</span>  (REST, rate-limit sensitive)
+treez_scraper     <span class="kw">→</span> every <span class="num">3h</span>  (REST with page-sourced key)
+custom_scraper    <span class="kw">→</span> every <span class="num">6h</span>  (Playwright, slowest)
+nj_crc_scraper    <span class="kw">→</span> weekly     (master dispensary list)
+
+<span class="cm"># Change detection flow (every scrape run):</span>
+<span class="num">1</span>. Fetch current deals from platform API
+<span class="num">2</span>. Compare to deals table (match on dispensary_id + external_id)
+<span class="num">3</span>. New deal found → INSERT + emit WebSocket event + check alerts
+<span class="num">4</span>. Deal modified → UPDATE + INSERT deal_history record
+<span class="num">5</span>. Deal no longer returned → mark is_active=FALSE, record deactivation
+
+<span class="cm"># Price change detection (every menu scrape):</span>
+<span class="num">1</span>. Fetch current menu from platform
+<span class="num">2</span>. Compare current_price to menu_items.current_price
+<span class="num">3</span>. If changed → UPDATE menu_items + INSERT price_changes record
+<span class="num">4</span>. If decreased → emit WebSocket + check price_drop alerts
+
+<span class="cm"># New product detection:</span>
+<span class="num">1</span>. Product not in menu_items for this dispensary → INSERT
+<span class="num">2</span>. Emit new_product event, check new_product alerts</pre>
+  </div>
+
+  <h3>Anti-Bot Approach</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Technique</th><th>When Applied</th></tr></thead>
+      <tbody>
+        <tr><td>Randomized 2–5s delay between requests</td><td>All scrapers</td></tr>
+        <tr><td>Rotating User-Agent pool (20+ real browser strings)</td><td>All scrapers</td></tr>
+        <tr><td>Playwright with real Chromium fingerprint</td><td>Weedmaps, custom sites</td></tr>
+        <tr><td>Residential proxy rotation (optional)</td><td>If any source starts blocking</td></tr>
+        <tr><td>Respectful crawl rate — never exceed 1 req/2s per domain</td><td>Always</td></tr>
+        <tr><td>Retry with exponential backoff on 429/503</td><td>All scrapers</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 7: LIVE MONITORING -->
+<div class="section" id="live">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>Live Monitoring & Real-Time Updates</h2>
+  </div>
+  <p>The live dashboard updates without page refresh. WebSockets push deal and price events to connected clients as scrapers detect changes.</p>
+  <div class="code-block">
+    <div class="code-label">WebSocket Event Schema</div>
+    <pre><span class="cm"># Event types pushed over WS /api/v1/live/deals</span>
+
+{ "event": <span class="str">"deal.new"</span>,
+  "data": {
+    "dispensary": { "id": <span class="str">"..."</span>, "name": <span class="str">"..."</span>, "city": <span class="str">"..."</span>, "county": <span class="str">"..."</span> },
+    "deal": { "id": <span class="str">"..."</span>, "title": <span class="str">"20% Off All Flower"</span>, "deal_type": <span class="str">"percent_off"</span>, "discount_value": <span class="num">20</span> },
+    "timestamp": <span class="str">"2026-08-17T14:30:00Z"</span>
+  }
+}
+
+{ "event": <span class="str">"deal.expired"</span>, "data": { "deal_id": <span class="str">"..."</span>, "dispensary_id": <span class="str">"..."</span> } }
+
+{ "event": <span class="str">"price.drop"</span>,
+  "data": {
+    "item": { "name": <span class="str">"Blue Dream 3.5g"</span>, "brand": <span class="str">"..."</span>, "category": <span class="str">"flower"</span> },
+    "dispensary": { <span class="str">"..."</span> },
+    "old_price": <span class="num">45.00</span>, "new_price": <span class="num">38.00</span>, "change_pct": <span class="num">-15.6</span>
+  }
+}
+
+{ "event": <span class="str">"product.new"</span>,
+  "data": {
+    "item": { "name": <span class="str">"..."</span>, "brand": <span class="str">"..."</span>, "category": <span class="str">"..."</span>, "price": <span class="num">35.00</span> },
+    "dispensary": { <span class="str">"..."</span> }
+  }
+}</pre>
+  </div>
+</div>
+
+<!-- SECTION 8: FRONTEND -->
+<div class="section" id="frontend">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Dashboard & Frontend</h2>
+  </div>
+  <p>Next.js 14 (App Router), TypeScript, Tailwind CSS. Four primary views: Live Feed, Map View, Competitive Analysis, and Reports.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>View</th><th>What It Shows</th><th>Key Interactions</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Live Deal Feed</strong></td>
+          <td>All active deals, newest first. Real-time updates via WebSocket.</td>
+          <td>Filter by county, city, radius, category, deal type, discount %. Star/bookmark deals.</td>
+        </tr>
+        <tr>
+          <td><strong>Map View</strong></td>
+          <td>NJ map with dispensary pins. Color-coded by deal count.</td>
+          <td>Click dispensary → sidebar with deals. Draw radius circle. Filter by county.</td>
+        </tr>
+        <tr>
+          <td><strong>Dispensary Detail</strong></td>
+          <td>One dispensary's current deals, full menu, price history.</td>
+          <td>View deal history timeline. Compare to previous week. Export menu snapshot.</td>
+        </tr>
+        <tr>
+          <td><strong>Competitive Analysis</strong></td>
+          <td>Side-by-side comparison of 2–5 dispensaries.</td>
+          <td>Select dispensaries, compare deal frequency, avg discount depth, category focus.</td>
+        </tr>
+        <tr>
+          <td><strong>Market Overview</strong></td>
+          <td>County-level or region-level dashboard. Deal trends over time.</td>
+          <td>Select time range. Breakdown by deal type, category, day of week.</td>
+        </tr>
+        <tr>
+          <td><strong>Reports</strong></td>
+          <td>Run, schedule, and export reports. View report history.</td>
+          <td>Configure report type → run → view results → export PDF/CSV.</td>
+        </tr>
+        <tr>
+          <td><strong>Alerts</strong></td>
+          <td>Manage alert rules. View alert history.</td>
+          <td>Create alert with geo + category filter → test → enable.</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Panel</strong></td>
+          <td>Scraper health, org management, platform stats.</td>
+          <td>View scrape job history. Trigger manual scrape. Manage users.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 9: ALERTS -->
+<div class="section" id="alerts">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2>Alert System</h2>
+  </div>
+  <p>Users configure rules. When a scrape run detects a match, the alert fires through configured channels within minutes of detection.</p>
+  <div class="code-block">
+    <div class="code-label">Alert Rule Config Schema (JSONB)</div>
+    <pre><span class="cm"># filter_config column in alerts table</span>
+{
+  <span class="cm">// Geographic filter (one of these)</span>
+  <span class="str">"geo"</span>: {
+    <span class="str">"mode"</span>: <span class="str">"radius"</span>,       <span class="cm">// radius | county | city | dispensary_list</span>
+    <span class="str">"lat"</span>: <span class="num">40.7282</span>, <span class="str">"lng"</span>: <span class="num">-74.0776</span>, <span class="str">"miles"</span>: <span class="num">10</span>
+  },
+
+  <span class="cm">// Deal filters (all optional)</span>
+  <span class="str">"categories"</span>: [<span class="str">"flower"</span>, <span class="str">"concentrate"</span>],
+  <span class="str">"brands"</span>: [<span class="str">"Jeeter"</span>, <span class="str">"Cookies"</span>],
+  <span class="str">"min_discount_pct"</span>: <span class="num">20</span>,   <span class="cm">// only alert if >= 20% off</span>
+  <span class="str">"deal_types"</span>: [<span class="str">"percent_off"</span>, <span class="str">"bogo"</span>],
+  <span class="str">"dispensary_ids"</span>: []       <span class="cm">// empty = all dispensaries matching geo</span>
+}
+
+<span class="cm"># Trigger types</span>
+new_deal       <span class="cm"># new deal posted matching filters</span>
+price_drop     <span class="cm"># any price decrease (optionally: min pct)</span>
+new_product    <span class="cm"># new SKU added to menu matching category/brand</span>
+deal_change    <span class="cm"># existing deal modified (value, dates, conditions)</span>
+deal_expired   <span class="cm"># tracked deal ended</span>
+
+<span class="cm"># Channels</span>
+email   <span class="cm"># via Resend</span>
+sms     <span class="cm"># via Twilio</span>
+webhook <span class="cm"># POST JSON to a URL (for Slack, custom integrations)</span></pre>
+  </div>
+</div>
+
+<!-- SECTION 10: REPORTS -->
+<div class="section" id="reports">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2>Reports & Analytics</h2>
+  </div>
+
+  <h3>Report Types</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Report</th><th>Description</th><th>Filters</th><th>Export</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Live Deal Snapshot</strong></td>
+          <td>All active deals right now, organized by county/city</td>
+          <td>Geo, category, deal type, min discount</td>
+          <td>PDF, CSV</td>
+        </tr>
+        <tr>
+          <td><strong>Deal History</strong></td>
+          <td>All deals run in a date range. Tracks start/end, changes</td>
+          <td>Date range, dispensary, county, category</td>
+          <td>CSV, Excel</td>
+        </tr>
+        <tr>
+          <td><strong>Price Change Report</strong></td>
+          <td>All price increases and drops in a period</td>
+          <td>Date range, direction, min pct change, category</td>
+          <td>CSV, Excel</td>
+        </tr>
+        <tr>
+          <td><strong>Competitor Deal Frequency</strong></td>
+          <td>How often each dispensary runs deals, by type and category</td>
+          <td>Dispensary list or radius, date range</td>
+          <td>PDF, CSV</td>
+        </tr>
+        <tr>
+          <td><strong>Market Discount Depth</strong></td>
+          <td>Average % off by category across a region</td>
+          <td>County, city, date range</td>
+          <td>PDF, CSV</td>
+        </tr>
+        <tr>
+          <td><strong>New Drops Report</strong></td>
+          <td>New products added to dispensary menus</td>
+          <td>Date range, category, brand, dispensary, geo</td>
+          <td>CSV</td>
+        </tr>
+        <tr>
+          <td><strong>Day-of-Week Deal Pattern</strong></td>
+          <td>Which dispensaries run deals on which days</td>
+          <td>County, dispensary list</td>
+          <td>PDF</td>
+        </tr>
+        <tr>
+          <td><strong>Weekly Digest</strong></td>
+          <td>Auto-generated email summary of the past 7 days</td>
+          <td>User's geo preferences</td>
+          <td>Email</td>
+        </tr>
+        <tr>
+          <td><strong>Alert Event History</strong></td>
+          <td>Log of all alerts that fired for this user/org</td>
+          <td>Date range, alert rule, trigger type</td>
+          <td>CSV</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout gold">
+    <strong>Live Reports</strong> — the Live Deal Snapshot and New Drops Report query the database in real-time and reflect the current state of scraped data. All other reports run against the historical tables and can be scheduled (daily, weekly, monthly) with results emailed to a recipient list.
+  </div>
+</div>
+
+<!-- SECTION 11: TECH STACK -->
+<div class="section" id="stack">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <h2>Tech Stack</h2>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Technology</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Backend API</strong></td><td>Python 3.12 + FastAPI</td><td>Async, fast, auto-docs, great for data APIs</td></tr>
+        <tr><td><strong>Database</strong></td><td>PostgreSQL 15 + PostGIS</td><td>Geo queries, JSONB, reliable, scalable</td></tr>
+        <tr><td><strong>ORM</strong></td><td>SQLAlchemy 2.0 (async)</td><td>Type-safe, async-ready</td></tr>
+        <tr><td><strong>Cache</strong></td><td>Redis 7</td><td>Job queuing, token blacklisting, response cache</td></tr>
+        <tr><td><strong>Task Queue</strong></td><td>Celery + Celery Beat</td><td>Scrape scheduling, background jobs</td></tr>
+        <tr><td><strong>Scraping (JS sites)</strong></td><td>Playwright (async)</td><td>Real browser, handles Cloudflare, dynamic JS</td></tr>
+        <tr><td><strong>Scraping (APIs)</strong></td><td>httpx (async)</td><td>Fast async HTTP, better than requests</td></tr>
+        <tr><td><strong>HTML parsing</strong></td><td>BeautifulSoup4 + lxml</td><td>Fast, reliable HTML extraction</td></tr>
+        <tr><td><strong>Auth</strong></td><td>python-jose + passlib</td><td>JWT handling, bcrypt password hashing</td></tr>
+        <tr><td><strong>Email</strong></td><td>Resend</td><td>Reliable transactional email, great API</td></tr>
+        <tr><td><strong>SMS</strong></td><td>Twilio</td><td>Industry standard for SMS alerts</td></tr>
+        <tr><td><strong>Frontend</strong></td><td>Next.js 14 + TypeScript</td><td>App Router, server components, SSR</td></tr>
+        <tr><td><strong>Styling</strong></td><td>Tailwind CSS</td><td>Fast iteration, consistent design system</td></tr>
+        <tr><td><strong>Charts</strong></td><td>Recharts</td><td>React-native, clean, customizable</td></tr>
+        <tr><td><strong>Maps</strong></td><td>Mapbox GL JS</td><td>Best-in-class, geo clustering built-in</td></tr>
+        <tr><td><strong>State Management</strong></td><td>Zustand + React Query</td><td>Simple client state + server state caching</td></tr>
+        <tr><td><strong>Dev</strong></td><td>Docker Compose</td><td>Local dev: API + DB + Redis + Celery in one command</td></tr>
+        <tr><td><strong>Prod</strong></td><td>Railway or Fly.io</td><td>Managed Postgres, Redis, easy deploys</td></tr>
+        <tr><td><strong>Geocoding</strong></td><td>Google Maps Geocoding API</td><td>Accurate for NJ addresses</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 12: PHASES -->
+<div class="section" id="phases">
+  <div class="section-header">
+    <span class="section-num">12</span>
+    <h2>Build Phases</h2>
+  </div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num"><div class="phase-circle">1</div></div>
+      <div class="phase-body">
+        <div class="phase-title">MVP — Data Foundation</div>
+        <div class="phase-sub">~3–4 weeks · Gets real data flowing</div>
+        <div class="phase-items">
+          <span class="phase-item">NJ CRC dispensary registry scraper</span>
+          <span class="phase-item">PostgreSQL + PostGIS schema</span>
+          <span class="phase-item">Jane API scraper</span>
+          <span class="phase-item">Dutchie GraphQL scraper</span>
+          <span class="phase-item">Celery task queue</span>
+          <span class="phase-item">FastAPI backend (read-only endpoints)</span>
+          <span class="phase-item">Basic Next.js deal list UI</span>
+          <span class="phase-item">County + city filter</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num"><div class="phase-circle">2</div></div>
+      <div class="phase-body">
+        <div class="phase-title">Auth + Weedmaps/Leafly</div>
+        <div class="phase-sub">~2–3 weeks · Platform goes private</div>
+        <div class="phase-items">
+          <span class="phase-item">JWT auth + user roles</span>
+          <span class="phase-item">Organization multi-tenancy</span>
+          <span class="phase-item">Weedmaps scraper</span>
+          <span class="phase-item">Leafly scraper</span>
+          <span class="phase-item">Deal deduplication across sources</span>
+          <span class="phase-item">Price change tracking</span>
+          <span class="phase-item">Deal history tables</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num"><div class="phase-circle">3</div></div>
+      <div class="phase-body">
+        <div class="phase-title">Live Feed + Alerts</div>
+        <div class="phase-sub">~2–3 weeks · Real-time intelligence</div>
+        <div class="phase-items">
+          <span class="phase-item">WebSocket live deal feed</span>
+          <span class="phase-item">Alert rule builder</span>
+          <span class="phase-item">Email alerts via Resend</span>
+          <span class="phase-item">SMS alerts via Twilio</span>
+          <span class="phase-item">Radius search (PostGIS)</span>
+          <span class="phase-item">Map view (Mapbox)</span>
+          <span class="phase-item">New product drop detection</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num"><div class="phase-circle">4</div></div>
+      <div class="phase-body">
+        <div class="phase-title">Reports + Admin</div>
+        <div class="phase-sub">~3 weeks · SaaS-ready</div>
+        <div class="phase-items">
+          <span class="phase-item">All 9 report types</span>
+          <span class="phase-item">Scheduled report delivery</span>
+          <span class="phase-item">PDF + CSV export</span>
+          <span class="phase-item">Admin panel (scraper management)</span>
+          <span class="phase-item">Competitive comparison view</span>
+          <span class="phase-item">Weekly digest email</span>
+          <span class="phase-item">Treez scraper</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num"><div class="phase-circle">5</div></div>
+      <div class="phase-body">
+        <div class="phase-title">SaaS Launch</div>
+        <div class="phase-sub">~2 weeks · Sell it</div>
+        <div class="phase-items">
+          <span class="phase-item">Stripe billing integration</span>
+          <span class="phase-item">Plan limits enforcement</span>
+          <span class="phase-item">Invite / onboarding flow</span>
+          <span class="phase-item">Public marketing landing page</span>
+          <span class="phase-item">Dispense + Sweed scrapers</span>
+          <span class="phase-item">Webhook alert channel</span>
+          <span class="phase-item">Expand beyond NJ (flag-gated)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 13: MASTER PROMPT -->
+<div class="section" id="prompt">
+  <div class="section-header">
+    <span class="section-num">13</span>
+    <h2>Master Build Prompt</h2>
+  </div>
+  <p>Copy and use this prompt as the authoritative brief for any developer or AI building this platform from scratch. It captures every requirement in a format optimized for implementation.</p>
+
+  <div class="prompt-wrap">
+    <div class="prompt-header">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <span>Master Build Prompt — NJ Cannabis Market Intelligence Platform</span>
+    </div>
+    <pre>
+<span class="ph">## PROJECT: NJ Cannabis Market Intelligence Platform</span>
+
+<span class="cm"># You are building a full-stack SaaS platform that scrapes every licensed
+# New Jersey cannabis dispensary's active deals, pricing, and new product
+# drops in near real-time, then surfaces that data through a geo-filtered
+# dashboard, alert system, and downloadable reports. This replaces Lit
+# Alerts and Pistil Data with an NJ-first, marketing-director-lens tool.</span>
+
+<span class="sec">--- TECH STACK ---</span>
+Backend:    Python 3.12 + FastAPI (async)
+Database:   PostgreSQL 15 + PostGIS extension
+ORM:        SQLAlchemy 2.0 async + Alembic migrations
+Cache:      Redis 7
+Task Queue: Celery + Celery Beat (Redis broker)
+Scraping:   Playwright (async, for JS-heavy sites) + httpx (for REST/GraphQL APIs)
+Auth:       JWT (python-jose) + bcrypt (passlib). Access token 15min, refresh 30d.
+Email:      Resend API
+SMS:        Twilio
+Frontend:   Next.js 14 (App Router) + TypeScript + Tailwind CSS
+Charts:     Recharts
+Maps:       Mapbox GL JS
+Infra Dev:  Docker Compose (postgres, redis, api, celery, celery-beat, frontend)
+Infra Prod: Railway or Fly.io
+
+<span class="sec">--- DATABASE SCHEMA (PostgreSQL + PostGIS) ---</span>
+Build these tables with all columns described below. All PKs are UUID.
+All timestamps are TIMESTAMPTZ defaulting to now(). Add PostGIS GIST index
+on dispensaries.geom. Add standard indexes on all foreign keys.
+
+organizations: id, name, plan(free|pro|enterprise), created_at
+users: id, org_id→organizations, email(unique), password_hash, role, name, created_at, last_login
+  role values: super_admin | admin | manager | analyst | viewer
+
+dispensaries: id, name, slug(unique), license_number, address, city, county, zip,
+  lat(numeric10,7), lng(numeric10,7), geom(GEOGRAPHY POINT 4326),
+  weedmaps_id, leafly_slug, jane_store_id, dutchie_id, treez_id, dispense_slug,
+  primary_platform(jane|dutchie|weedmaps|leafly|treez|custom),
+  website, phone, instagram, status(active|inactive), med_only(bool),
+  created_at, updated_at
+
+deals: id, dispensary_id→dispensaries, source_platform, external_id,
+  title, description, deal_type(percent_off|dollar_off|bogo|bundle|first_time|daily),
+  discount_value(numeric), discount_unit(percent|dollar), minimum_purchase(numeric),
+  applicable_categories(text[]), applicable_brands(text[]), day_of_week(text[]),
+  starts_at, ends_at, is_active(bool default true), raw_text,
+  first_seen_at, last_seen_at, created_at
+  UNIQUE(dispensary_id, source_platform, external_id)
+
+deal_history: id, deal_id→deals, change_type(created|modified|deactivated|reactivated),
+  old_data(jsonb), new_data(jsonb), changed_at
+
+menu_items: id, dispensary_id→dispensaries, external_id, name, brand, category,
+  subcategory, thc_percent(numeric5,2), cbd_percent(numeric5,2), weight(numeric),
+  current_price(numeric10,2), sale_price(numeric10,2), is_active(bool),
+  first_seen_at, updated_at
+  UNIQUE(dispensary_id, external_id)
+
+price_changes: id, item_id→menu_items, dispensary_id→dispensaries,
+  old_price(numeric10,2), new_price(numeric10,2), change_amount(numeric10,2),
+  change_pct(numeric6,2), change_type(increase|decrease), detected_at
+
+alerts: id, user_id→users, org_id→organizations, name, trigger_type, filter_config(jsonb),
+  channels(text[] e.g. {email,sms,webhook}), is_active(bool), created_at
+
+alert_events: id, alert_id→alerts, deal_id→deals nullable, item_id→menu_items nullable,
+  message, sent_at, channels_used(text[])
+
+scrape_sources: id, dispensary_id→dispensaries, platform, source_url, config(jsonb),
+  is_active(bool), last_scrape_at, next_scrape_at, created_at
+
+scrape_jobs: id, source_id→scrape_sources, status(pending|running|success|error),
+  started_at, completed_at, deals_found(int), errors(jsonb)
+
+<span class="sec">--- DATA SOURCES ---</span>
+Build one scraper class per platform in scrapers/ directory.
+Each scraper must: fetch data, normalize to schema, compare to DB, detect changes,
+save changes, emit events, log job result.
+
+JANE (iheartjane.com) — Priority: HIGH
+  Base: https://api.iheartjane.com/v1/
+  Discovery: GET /stores?state=NJ (returns all NJ stores with jane store_id)
+  Deals: GET /stores/{store_id}/specials
+  Menu: GET /stores/{store_id}/menu
+  Auth: none required for public endpoints
+  Schedule: every 2 hours
+
+DUTCHIE — Priority: HIGH
+  Detect by: embedded script tag src containing dutchie.com or dutchie iframe
+  GraphQL endpoint: https://dutchie.com/api/retailer/graphql
+  Also try: https://plus.dutchie.com/plus/2021-07/graphql
+  Get retailer_id from the embed URL or script tag
+  Query: GetMenu(retailerId) → products with variants.price + specialPricing + specials
+  Schedule: every 2 hours
+
+WEEDMAPS — Priority: HIGH
+  Base: https://api-g.weedmaps.com/discovery/v1/
+  NJ listings: GET /listings?filter[state_abv]=NJ&filter[type]=dispensary&page[size]=100
+  Deals/promos: GET /listings/{wmid}/promotions
+  Menu: GET /listings/{wmid}/menu_items?include=price_tiers
+  Headers required: User-Agent (real browser UA), Referer: https://weedmaps.com
+  Schedule: every 3 hours. Respect rate limits with 2-3s delays.
+
+LEAFLY — Priority: MEDIUM
+  Base: https://consumer-api.leafly.com/api/
+  NJ dispensaries: GET /dispensary_info/v2?state_abbr=NJ&take=50&skip=0
+  Deals: GET /dispensary_info/v2/{slug}/deals
+  Menu: GET /strain_playlists/v2?dispensary_slug={slug}
+  Headers: app_type=web, x-user-timezone: America/New_York
+  Schedule: every 4 hours
+
+TREEZ — Priority: MEDIUM
+  Detect by: window.treezConfig in page source (use Playwright to extract)
+  Extract apiKey and retailer_id from page JS
+  Base: https://api.treez.io/catalog/v3/
+  Menu: GET /catalog/{retailer_id}/menu
+  Specials: GET /catalog/{retailer_id}/specials
+  Auth header: x-api-key: {extracted key}
+  Schedule: every 3 hours
+
+DISPENSE — Priority: WATCH
+  Base: https://api.dispense.us/v1/
+  Store slug found in embedded script or meta tags
+  Menu: GET /menu?store={slug}
+  Schedule: every 4 hours
+
+NJ CRC REGISTRY — Priority: CRITICAL (weekly)
+  Source: https://www.nj.gov/cannabis/businesses/licensees/
+  Scrape with Playwright, extract all active licenses, update dispensaries table
+  Geocode any new entries via Google Maps Geocoding API
+  Schedule: weekly (Sunday midnight)
+
+<span class="sec">--- CHANGE DETECTION LOGIC ---</span>
+After every scrape run, for each deal returned from source:
+  1. Look up in deals table by (dispensary_id, source_platform, external_id)
+  2. Not found → INSERT new deal, set is_active=true, record deal_history(created)
+     → emit WebSocket event: deal.new
+     → check all active alerts with trigger_type=new_deal
+  3. Found and data changed → UPDATE deals, record deal_history(modified)
+  4. Previously seen but NOT returned this scrape → set is_active=false
+     → record deal_history(deactivated) → emit WebSocket: deal.expired
+
+For each menu_item returned:
+  1. Look up by (dispensary_id, external_id)
+  2. Not found → INSERT, emit WebSocket: product.new
+     → check alerts with trigger_type=new_product
+  3. Found, price changed → UPDATE, INSERT price_changes record
+     → if price decreased: emit WebSocket: price.drop
+     → check alerts with trigger_type=price_drop
+
+<span class="sec">--- AUTH SYSTEM ---</span>
+POST /api/v1/auth/login → returns {access_token, refresh_token, user}
+  access_token: JWT signed HS256, expires 15min
+  refresh_token: JWT signed HS256, expires 30d, stored in httpOnly cookie
+POST /api/v1/auth/refresh → validates refresh_token, returns new access_token (rotate refresh)
+POST /api/v1/auth/logout → blacklist refresh token in Redis with TTL = remaining life
+All protected routes: Bearer token in Authorization header
+
+Roles and permissions:
+  super_admin: everything, including cross-org access and scraper management
+  admin: full org access, user management, all reports, all alerts
+  manager: own alerts, own reports, view all data
+  analyst: view all data, export reports, no alert modification
+  viewer: view live feed and current deals only, no exports, no alerts
+
+<span class="sec">--- API ENDPOINTS ---</span>
+All under /api/v1/. Auth required on all except /auth/*.
+Return paginated lists with {data, total, page, per_page}.
+Support ?county=, ?city=, ?category=, ?deal_type=, ?min_discount= on deal endpoints.
+
+GET /dispensaries/ — list with county/city filter
+GET /dispensaries/{id} — detail with active deal count
+GET /dispensaries/nearby?lat=&lng=&radius_miles= — PostGIS ST_DWithin query
+GET /deals/ — live deal feed, all filters, sorted by last_seen_at desc
+GET /deals/{id}/history — deal_history for this deal
+GET /deals/new?hours=24 — deals first seen in last N hours
+GET /prices/changes?hours=48 — recent price movements
+GET /prices/drops — price decreases only
+GET /menu/new-products?days=7 — new items in last N days
+POST /reports/run — run any report type with config, returns results + download URL
+GET /reports/saved — user's saved report configurations
+POST /alerts/ — create alert with filter_config JSON
+POST /alerts/{id}/test — send test notification
+WS /live/deals — WebSocket for real-time deal + price events
+
+<span class="sec">--- ALERT SYSTEM ---</span>
+After change detection, for each new deal / price drop / new product:
+  1. Query all active alerts matching: trigger_type AND geo filter AND category/brand filters
+  2. For each matching alert: compose message, dispatch to each channel:
+     email: POST to Resend API with HTML template
+     sms: POST to Twilio Messages API
+     webhook: POST JSON payload to alert.filter_config.webhook_url
+  3. INSERT alert_events record
+
+Alert filter_config shape:
+  geo: {mode: radius|county|city|list, lat, lng, miles, county, city, dispensary_ids[]}
+  categories: string[] (flower, edible, concentrate, vape, preroll, tincture, topical)
+  brands: string[]
+  min_discount_pct: number
+  deal_types: string[]
+
+<span class="sec">--- REPORT TYPES ---</span>
+Implement each report as a separate function returning structured data.
+All reports accept: {date_from, date_to, county, city, dispensary_ids[], categories[]}
+
+live_deal_snapshot: all is_active=true deals, organized by county+city, with dispensary info
+deal_history: all deals in date range with changes timeline
+price_changes: all price_changes in date range, grouped by item + dispensary
+competitor_deal_frequency: COUNT(deals) per dispensary per day, breakdown by deal_type
+market_discount_depth: AVG(discount_value) by category and county for date range
+new_drops: menu_items WHERE first_seen_at in date range
+day_of_week_pattern: COUNT(deals) by day_of_week per dispensary
+alert_history: alert_events in date range for this user
+
+All reports exportable to CSV. Selected reports exportable to PDF via WeasyPrint.
+Reports can be saved as configurations and scheduled (daily|weekly|monthly).
+Scheduled reports run via Celery Beat and email results to configured recipients.
+
+<span class="sec">--- FRONTEND VIEWS ---</span>
+/app/(auth)/login — JWT login form
+/app/dashboard — summary stats + live deal feed snippet + recent alerts
+/app/deals — full filterable live deal feed, real-time via WebSocket
+/app/map — Mapbox map, dispensary pins colored by deal count, radius tool
+/app/dispensaries/{id} — deal timeline, menu snapshot, price history charts
+/app/compare — side-by-side competitive analysis (select 2-5 dispensaries)
+/app/reports — run/schedule/export reports
+/app/alerts — manage alert rules + alert history
+/app/admin — scraper health, job history, user management (super_admin only)
+/app/settings — user profile, notification preferences, org settings (admin)
+
+<span class="sec">--- DIRECTORY STRUCTURE ---</span>
+backend/
+  app/
+    api/routes/       # one file per route group
+    core/             # config, security, database, redis
+    models/           # SQLAlchemy models
+    schemas/          # Pydantic request/response schemas
+    services/         # business logic (deals, alerts, reports, geo)
+    scrapers/         # one module per platform
+      base.py         # abstract base scraper
+      jane.py
+      dutchie.py
+      weedmaps.py
+      leafly.py
+      treez.py
+      dispense.py
+      crc_registry.py
+    tasks/            # Celery tasks
+    utils/            # geocoding, normalization, export helpers
+  alembic/            # migrations
+  tests/
+
+frontend/
+  app/               # Next.js App Router pages
+  components/        # shared UI components
+  lib/               # API client, WebSocket hook, geo utilities
+  stores/            # Zustand client state
+
+<span class="sec">--- START WITH (PHASE 1) ---</span>
+1. Initialize backend with FastAPI, SQLAlchemy, Alembic
+2. Write and run initial migration creating all tables above
+3. Build crc_registry.py scraper (Playwright → geocode → insert dispensaries)
+4. Build jane.py scraper (httpx → normalize → change detection → deal inserts)
+5. Build dutchie.py scraper (httpx GraphQL → normalize → change detection)
+6. Wire Celery Beat to run Jane + Dutchie scrapers every 2h
+7. Build read-only FastAPI endpoints: /dispensaries/nearby, /deals/, /deals/new
+8. Initialize Next.js frontend with Tailwind
+9. Build deal list page with county/city filter calling the API
+10. Confirm real NJ dispensary data is flowing end-to-end
+
+Then proceed through phases 2–5 above.
+</pre>
+  </div>
+</div>
+
+</main>
